@@ -1,7 +1,6 @@
 import java.io.*;
 public class main {
-    public static void main(String[] args) {
-        //FileWriter fw = new FileWriter();
-
+    public static void main(String[] args) throws IOException {
+        Tablero.getInstance().CargaDeFichero("ROTAL1.txt");
     }
 }

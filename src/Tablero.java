@@ -11,6 +11,20 @@ public class Tablero {
     private Pieza objetivo;
 
     /*
+        Devuelve la pieza que hay que mover por el tablero hasta dar con la solucion
+     */
+    public Pieza getPieza() {
+        return pieza;
+    }
+
+    /*
+        Devuelve la posicion en la que tiene que debe estar la pieza para acabar
+     */
+    public Pieza getObjetivo() {
+        return objetivo;
+    }
+
+    /*
         Constructor por defecto del tablero que se usará. Es único.
      */
     private Tablero(){
@@ -175,6 +189,41 @@ public class Tablero {
             return true;
         }
         return false;
+    }
+
+    public void arriba(){
+        if( (pieza.getFila()-1 > 0) && (matriz[pieza.getFila() - 1][pieza.getColumna()] != "1")){
+            pieza.setFila(pieza.getFila()-1);
+        }
+    }
+
+    public void abajo(){
+        if( (pieza.getFila()+1 < 9) && (matriz[pieza.getFila() + 1][pieza.getColumna()] != "1")){
+            pieza.setFila(pieza.getFila()+1);
+        }
+    }
+
+    public void derecha(){
+        if( (pieza.getColumna()+1 < 9) && (matriz[pieza.getFila()][pieza.getColumna() + 1] != "1")){
+            pieza.setColumna(pieza.getColumna()+1);
+        }
+    }
+
+    public void izquierda(){
+        if( (pieza.getColumna()-1 > 0) && (matriz[pieza.getFila()][pieza.getColumna() - 1] != "1")){
+            pieza.setColumna(pieza.getColumna()-1);
+        }
+    }
+
+    public void rotar(){
+        if(pieza.getOrientacion() == "A"){
+            if((pieza.getColumna()+2 < 9) && (matriz[pieza.getFila()][pieza.getColumna()+2] != "1")
+                && (pieza.getFila()+1 < 9) &&(matriz[pieza.getFila()+1][pieza.getColumna()] != "1")){
+                matriz[pieza.getFila()][pieza.getColumna()+2] = matriz[pieza.getFila()-2][pieza.getColumna()];
+                matriz[pieza.getFila()][pieza.getColumna()+1] = matriz[pieza.getFila()-1][pieza.getColumna()];
+                matriz[pieza.getFila()+1][pieza.getColumna()] = matriz[pieza.getFila()][pieza.getColumna()+1];
+            }
+        }
     }
 }
 

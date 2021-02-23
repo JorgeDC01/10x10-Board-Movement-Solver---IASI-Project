@@ -2,7 +2,7 @@ public class Pieza {
 
     private int fila;
     private int columna;
-    String orientacion;
+    private String orientacion;
 
     /*
         Devuelve la fila de la matriz donde se encuentra el vertice

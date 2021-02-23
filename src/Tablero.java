@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Tablero {
     private static Tablero t;
-    String nombreFichero;
+    private String nombreFichero;
     private String matriz[][];
     private Pieza pieza;
     private Pieza objetivo;

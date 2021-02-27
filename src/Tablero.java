@@ -156,5 +156,18 @@ public class Tablero {
         }
         return true;
     }
+    /*
+
+        Movimiento: 1 opcion
+        1. Crear pieza auxiliar identica a la del nodo que se expande
+        2. Relizar el movimiento de la pieza
+        3. Comprobar si alguna casilla de la pieza(usando la fila y columna de cada elemento?) se solapa con un muro del tablero. Si coincide con un 1, devuelve false ?
+           Teniendo las casillas almacenadas de la pieza
+        4.
+
+
+
+
+     */
 }
 

@@ -57,6 +57,8 @@ public class CargarDatos {
                 }
             }
         }
+        // Cargar los elementos de la pieza.
+        
         if(esVertice)
             if(tipoPieza.equals("2")){
                 Tablero.getInstance().getPieza().mostrarPieza();

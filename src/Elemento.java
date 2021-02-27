@@ -15,5 +15,8 @@ public class Elemento {
     public int getColumnaElemento(){return this.columnaElemento;}
     public void setFilaElemento(int filaElemento) { this.filaElemento = filaElemento; }
     public void setColumnaElemento(int columnaElemento) { this.columnaElemento = columnaElemento; }
+    public void inicializarElemento(){
+
+    }
 
 }

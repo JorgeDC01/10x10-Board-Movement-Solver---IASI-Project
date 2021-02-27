@@ -58,6 +58,44 @@ public class Pieza {
         this.filaVertice = filaVertice;
         this.columnaVertice = columnaVertice;
         this.orientacion = orientacion;
+        aislado = new Elemento();
+        adyacente = new Elemento();
+        extremo = new Elemento();
+
+        switch(orientacion){
+            case "A":
+                aislado.setFilaElemento(getFila());
+                aislado.setColumnaElemento(getColumna()+1);
+                adyacente.setFilaElemento(getFila()-1);
+                adyacente.setColumnaElemento(getColumna());
+                extremo.setFilaElemento(getFila()-2);
+                extremo.setColumnaElemento(getColumna());
+                break;
+            case "B":
+                aislado.setFilaElemento(getFila());
+                aislado.setColumnaElemento(getColumna()-1);
+                adyacente.setFilaElemento(getFila()+1);
+                adyacente.setColumnaElemento(getColumna());
+                extremo.setFilaElemento(getFila()+2);
+                extremo.setColumnaElemento(getColumna());
+                break;
+            case "D":
+                aislado.setFilaElemento(getFila()+1);
+                aislado.setColumnaElemento(getColumna());
+                adyacente.setFilaElemento(getFila());
+                adyacente.setColumnaElemento(getColumna()+1);
+                extremo.setFilaElemento(getFila());
+                extremo.setColumnaElemento(getColumna()+2);
+                break;
+            case "I":
+                aislado.setFilaElemento(getFila()-1);
+                aislado.setColumnaElemento(getColumna());
+                adyacente.setFilaElemento(getFila());
+                adyacente.setColumnaElemento(getColumna()-1);
+                extremo.setFilaElemento(getFila());
+                extremo.setColumnaElemento(getColumna()-2);
+                break;
+        }
     }
 
     /*

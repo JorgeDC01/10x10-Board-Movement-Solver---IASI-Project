@@ -51,6 +51,18 @@ public class Pieza {
         this.orientacion = orientacion;
     }
 
+    public Elemento getAislado () {
+        return aislado;
+    }
+
+    public Elemento getAdyacente () {
+        return adyacente;
+    }
+
+    public Elemento getExtremo () {
+        return extremo;
+    }
+
     /*
         Inicializa la pieza con la posicion inicial en el tablero
     */

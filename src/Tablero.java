@@ -101,61 +101,33 @@ public class Tablero {
         }
         return false;
     }
-    // ------------------------------------------------- CODIGO QUE SE VERÁ EL SÁBADO ---------------------------------------------------------- /
-    public void arriba(){
-        String movimiento = "arriba";
-        Pieza aux = new Pieza(getPieza().getFila()+1,getPieza().getColumna(),getPieza().getOrientacion());
-        if(checkeoMovimiento(movimiento, aux)){
 
-        }
-        /*if( (pieza.getFila()-1 > 0) && (matriz[pieza.getFila() - 1][pieza.getColumna()] != "1")){
-            pieza.setFila(pieza.getFila()-1);
-        }
-         */
-    }
+    public void moverArriba () {
+        Pieza piezaAux = new Pieza (getPieza ().getFila (), getPieza ().getColumna (), getPieza ().getOrientacion ());
+        piezaAux.getAislado ().setFilaElemento (piezaAux.getAislado ().getFilaElemento () - 1);
+        piezaAux.setFila (piezaAux.getFila () - 1);
+        piezaAux.getAdyacente ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento () - 1);
+        piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () - 1);
 
-    public void abajo(){
-        if( (pieza.getFila()+1 < 9) && (matriz[pieza.getFila() + 1][pieza.getColumna()] != "1")){
-            pieza.setFila(pieza.getFila()+1);
+        if (checkearMovimiento (piezaAux)) {
+            getPieza ().getAislado ().setFilaElemento (getPieza ().getAislado ().getFilaElemento () - 1);
+            getPieza ().setFila (getPieza ().getFila () - 1);
+            getPieza ().getAdyacente ().setFilaElemento (getPieza ().getAdyacente ().getFilaElemento () - 1);
+            getPieza ().getExtremo ().setFilaElemento (getPieza ().getExtremo ().getFilaElemento () - 1);
         }
     }
 
-    public void derecha(){
-        if( (pieza.getColumna()+1 < 9) && (matriz[pieza.getFila()][pieza.getColumna() + 1] != "1")){
-            pieza.setColumna(pieza.getColumna()+1);
+    public boolean checkearMovimiento (Pieza piezaAux) {
+        boolean result = true;
+        if (getMatriz () [piezaAux.getAislado ().getFilaElemento ()][piezaAux.getAislado ().getColumnaElemento ()].equals ("1") ||
+                getMatriz () [piezaAux.getFila ()][piezaAux.getColumna ()].equals ("1") ||
+                getMatriz () [piezaAux.getAdyacente ().getFilaElemento ()][piezaAux.getAdyacente ().getColumnaElemento ()].equals ("1") ||
+                getMatriz () [piezaAux.getExtremo ().getFilaElemento ()][piezaAux.getExtremo ().getColumnaElemento ()].equals ("1")) {
+            result = false;
         }
+        return result;
     }
 
-    public void izquierda(){
-        if( (pieza.getColumna()-1 > 0) && (matriz[pieza.getFila()][pieza.getColumna() - 1] != "1")){
-            pieza.setColumna(pieza.getColumna()-1);
-        }
-    }
-
-    public void rotar(){
-        if(pieza.getOrientacion() == "A"){
-            if((pieza.getColumna()+2 < 9) && (matriz[pieza.getFila()][pieza.getColumna()+2] != "1")
-                && (pieza.getFila()+1 < 9) &&(matriz[pieza.getFila()+1][pieza.getColumna()] != "1")){
-                matriz[pieza.getFila()][pieza.getColumna()+2] = matriz[pieza.getFila()-2][pieza.getColumna()];
-                matriz[pieza.getFila()][pieza.getColumna()+1] = matriz[pieza.getFila()-1][pieza.getColumna()];
-                matriz[pieza.getFila()+1][pieza.getColumna()] = matriz[pieza.getFila()][pieza.getColumna()+1];
-            }
-        }
-    }
-    public boolean checkeoMovimiento(String movimiento, Pieza aux){
-        switch(getPieza().getOrientacion()){
-            case "A":
-                // metodo
-                break;
-            case "D":
-                break;
-            case "B":
-                break;
-            case "I":
-                break;
-        }
-        return true;
-    }
     /*
 
         Movimiento: 1 opcion

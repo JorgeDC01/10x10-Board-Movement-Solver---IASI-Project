@@ -1,35 +1,40 @@
 public class Pieza {
 
-    private int fila;
-    private int columna;
+    private int filaVertice;
+    private int columnaVertice;
     private String orientacion;
+
+    // Todas las casillas de la pieza
+    private Elemento aislado;
+    private Elemento adyacente;
+    private Elemento extremo;
 
     /*
         Devuelve la fila de la matriz donde se encuentra el vertice
      */
     public int getFila() {
-        return fila;
+        return filaVertice;
     }
 
     /*
         Establece la nueva fila donde se pone el vertice en la matriz
      */
     public void setFila(int fila) {
-        this.fila = fila;
+        this.filaVertice = fila;
     }
 
     /*
         Devuelve la columna de la matriz donde se encuentra el vertice
      */
     public int getColumna() {
-        return columna;
+        return columnaVertice;
     }
 
     /*
         Establece la nueva columna donde se pone el vertice en la matriz
      */
     public void setColumna(int columna) {
-        this.columna = columna;
+        this.columnaVertice = columna;
     }
 
     /*
@@ -49,9 +54,9 @@ public class Pieza {
     /*
         Inicializa la pieza con la posicion inicial en el tablero
     */
-    public Pieza(int fila, int columna, String orientacion){
-        this.fila = fila;
-        this.columna = columna;
+    public Pieza(int filaVertice, int columnaVertice, String orientacion){
+        this.filaVertice = filaVertice;
+        this.columnaVertice = columnaVertice;
         this.orientacion = orientacion;
     }
 
@@ -59,7 +64,7 @@ public class Pieza {
         Muestra la pieza por pantalla
      */
     public void mostrarPieza(){
-        System.out.println(fila + " - " + columna + " -  " + orientacion);
+        System.out.println(filaVertice + " - " + columnaVertice + " -  " + orientacion);
     }
 
 }

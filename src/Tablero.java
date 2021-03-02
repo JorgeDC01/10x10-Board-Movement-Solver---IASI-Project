@@ -162,6 +162,71 @@ public class Tablero {
         }
     }
 
+    public void rotar(){
+        Pieza piezaAux = new Pieza (getPieza ().getFila (), getPieza ().getColumna (), getPieza ().getOrientacion ());
+        String orientacion = piezaAux.getOrientacion();
+
+        switch (orientacion){
+            case "A":
+                piezaAux.getAdyacente().setFilaElemento(piezaAux.getAislado().getFilaElemento());
+                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento() + 1);
+                piezaAux.getAislado().setFilaElemento(piezaAux.getFila()+1);
+                piezaAux.getAislado().setColumnaElemento(piezaAux.getColumna());
+                piezaAux.setOrientacion("D");
+                if(checkearMovimiento(piezaAux)){
+                    //pendiente de metodo
+                    //aqui debemos crear el nodo y copiar la pieza auxiliar en la nueva pieza
+                    //ese nodo va a ser el hijo
+                }
+
+                break;
+            case "B":
+                piezaAux.getAdyacente().setFilaElemento(piezaAux.getFila());
+                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getColumna()-1);
+                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento()-1);
+                piezaAux.getAislado().setFilaElemento(piezaAux.getFila()-1);
+                piezaAux.getAislado().setColumnaElemento(piezaAux.getColumna());
+                piezaAux.setOrientacion("I");
+                if(checkearMovimiento(piezaAux)){
+                    //pendiente de metodo
+
+                }
+
+                break;
+            case "I":
+                piezaAux.getAdyacente().setFilaElemento(piezaAux.getFila()-1);
+                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getColumna());
+                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento()-1);
+                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                piezaAux.getAislado().setFilaElemento(piezaAux.getFila());
+                piezaAux.getAislado().setColumnaElemento(piezaAux.getColumna()+1);
+                piezaAux.setOrientacion("A");
+                if(checkearMovimiento(piezaAux)){
+                    //pendiente de metodo
+
+                }
+
+                break;
+            case "D":
+                piezaAux.getAdyacente().setFilaElemento(piezaAux.getFila()+1);
+                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getColumna());
+                piezaAux.getExtremo().setFilaElemento(piezaAux.getFila()+1);
+                piezaAux.getExtremo().setColumnaElemento(piezaAux.getColumna());
+                piezaAux.getAislado().setFilaElemento(piezaAux.getFila());
+                piezaAux.getAislado().setColumnaElemento(piezaAux.getColumna()-1);
+                piezaAux.setOrientacion("B");
+                if(checkearMovimiento(piezaAux)){
+                    //pendiente de metodo
+
+                }
+                break;
+        }
+
+    }
+
     //mueve una pieza auxiliar y comprueba cada elemento para ver si ha colisionado
     //true si se puede mover sin colision; si no false
     public boolean checkearMovimiento (Pieza piezaAux) {

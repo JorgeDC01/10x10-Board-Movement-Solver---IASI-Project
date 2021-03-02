@@ -179,6 +179,12 @@ public class Tablero {
                     //pendiente de metodo
                     //aqui debemos crear el nodo y copiar la pieza auxiliar en la nueva pieza
                     //ese nodo va a ser el hijo
+                    getPieza ().getAislado ().setFilaElemento(piezaAux.getAislado().getFilaElemento());
+                    getPieza().getAislado().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                    getPieza().getExtremo().setFilaElemento(piezaAux.getExtremo().getFilaElemento());
+                    getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
+                    getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                    getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
                 }
 
                 break;
@@ -192,7 +198,14 @@ public class Tablero {
                 piezaAux.setOrientacion("I");
                 if(checkearMovimiento(piezaAux)){
                     //pendiente de metodo
-
+                    //aqui debemos crear el nodo y copiar la pieza auxiliar en la nueva pieza
+                    //ese nodo va a ser el hijo
+                    getPieza ().getAislado ().setFilaElemento(piezaAux.getAislado().getFilaElemento());
+                    getPieza().getAislado().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                    getPieza().getExtremo().setFilaElemento(piezaAux.getExtremo().getFilaElemento());
+                    getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
+                    getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                    getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
                 }
 
                 break;
@@ -206,7 +219,14 @@ public class Tablero {
                 piezaAux.setOrientacion("A");
                 if(checkearMovimiento(piezaAux)){
                     //pendiente de metodo
-
+                    //aqui debemos crear el nodo y copiar la pieza auxiliar en la nueva pieza
+                    //ese nodo va a ser el hijo
+                    getPieza ().getAislado ().setFilaElemento(piezaAux.getAislado().getFilaElemento());
+                    getPieza().getAislado().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                    getPieza().getExtremo().setFilaElemento(piezaAux.getExtremo().getFilaElemento());
+                    getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
+                    getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                    getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
                 }
 
                 break;
@@ -220,8 +240,16 @@ public class Tablero {
                 piezaAux.setOrientacion("B");
                 if(checkearMovimiento(piezaAux)){
                     //pendiente de metodo
-
+                    //aqui debemos crear el nodo y copiar la pieza auxiliar en la nueva pieza
+                    //ese nodo va a ser el hijo
+                    getPieza ().getAislado ().setFilaElemento(piezaAux.getAislado().getFilaElemento());
+                    getPieza().getAislado().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                    getPieza().getExtremo().setFilaElemento(piezaAux.getExtremo().getFilaElemento());
+                    getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
+                    getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
+                    getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
                 }
+                
                 break;
         }
 

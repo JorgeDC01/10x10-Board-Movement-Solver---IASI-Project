@@ -114,7 +114,10 @@ public class Pieza {
         Muestra la pieza por pantalla
      */
     public void mostrarPieza(){
-        System.out.println(filaVertice + " - " + columnaVertice + " -  " + orientacion);
+        System.out.println("VERTICE: "+filaVertice + " - " + columnaVertice + " -  " + orientacion);
+        System.out.println("AISLADO: "+aislado.getFilaElemento() + " - " + aislado.getColumnaElemento());
+        System.out.println("ADYACENTE: "+adyacente.getFilaElemento() + " - " + adyacente.getColumnaElemento());
+        System.out.println("EXTREMO: "+extremo.getFilaElemento() + " - " + extremo.getColumnaElemento());
     }
 
 }

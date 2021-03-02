@@ -4,8 +4,13 @@ public class main {
         CargarDatos carga = new CargarDatos();
         carga.CargaDeFichero("ROTAL1.txt");
         carga.inicializarPieza("2");
-    }
-    public void cargarDatos(Tablero t){
 
+        System.out.println("\n");
+        Tablero.getInstance().rotar();
+        Tablero.getInstance().getPieza().mostrarPieza();
+        System.out.println("\n");
+        Tablero.getInstance().moverAbajo();
+        Tablero.getInstance().getPieza().mostrarPieza();
     }
+
 }

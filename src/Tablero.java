@@ -185,6 +185,7 @@ public class Tablero {
                     getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
                     getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
                     getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                    getPieza().setOrientacion(piezaAux.getOrientacion());
                 }
 
                 break;
@@ -206,6 +207,7 @@ public class Tablero {
                     getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
                     getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
                     getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                    getPieza().setOrientacion(piezaAux.getOrientacion());
                 }
 
                 break;
@@ -227,6 +229,7 @@ public class Tablero {
                     getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
                     getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
                     getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                    getPieza().setOrientacion(piezaAux.getOrientacion());
                 }
 
                 break;
@@ -248,8 +251,9 @@ public class Tablero {
                     getPieza().getExtremo().setColumnaElemento(piezaAux.getExtremo().getColumnaElemento());
                     getPieza().getAdyacente().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
                     getPieza().getAdyacente().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                    getPieza().setOrientacion(piezaAux.getOrientacion());
                 }
-                
+
                 break;
         }
 

@@ -117,6 +117,53 @@ public class Tablero {
         }
     }
 
+    public void moverAbajo(){
+        Pieza piezaAux = new Pieza (getPieza ().getFila (), getPieza ().getColumna (), getPieza ().getOrientacion ());
+        piezaAux.getAislado ().setFilaElemento (piezaAux.getAislado ().getFilaElemento () + 1);
+        piezaAux.setFila (piezaAux.getFila () + 1);
+        piezaAux.getAdyacente ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento () + 1);
+        piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () + 1);
+
+        if (checkearMovimiento (piezaAux)) {
+            getPieza ().getAislado ().setFilaElemento (getPieza ().getAislado ().getFilaElemento () + 1);
+            getPieza ().setFila (getPieza ().getFila () + 1);
+            getPieza ().getAdyacente ().setFilaElemento (getPieza ().getAdyacente ().getFilaElemento () + 1);
+            getPieza ().getExtremo ().setFilaElemento (getPieza ().getExtremo ().getFilaElemento () + 1);
+        }
+    }
+
+    public void moverDerecha(){
+        Pieza piezaAux = new Pieza (getPieza ().getFila (), getPieza ().getColumna (), getPieza ().getOrientacion ());
+        piezaAux.getAislado ().setColumnaElemento (piezaAux.getAislado ().getColumnaElemento () + 1);
+        piezaAux.setColumna (piezaAux.getColumna () + 1);
+        piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () + 1);
+        piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () + 1);
+
+        if (checkearMovimiento (piezaAux)) {
+            getPieza ().getAislado ().setColumnaElemento (getPieza ().getAislado ().getColumnaElemento () + 1);
+            getPieza ().setColumna (getPieza ().getColumna () + 1);
+            getPieza ().getAdyacente ().setColumnaElemento (getPieza ().getAdyacente ().getColumnaElemento () + 1);
+            getPieza ().getExtremo ().setColumnaElemento (getPieza ().getExtremo ().getColumnaElemento () + 1);
+        }
+    }
+
+    public void moverIzquierda(){
+        Pieza piezaAux = new Pieza (getPieza ().getFila (), getPieza ().getColumna (), getPieza ().getOrientacion ());
+        piezaAux.getAislado ().setColumnaElemento (piezaAux.getAislado ().getColumnaElemento () - 1);
+        piezaAux.setColumna (piezaAux.getColumna () - 1);
+        piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () - 1);
+        piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () - 1);
+
+        if (checkearMovimiento (piezaAux)) {
+            getPieza ().getAislado ().setColumnaElemento (getPieza ().getAislado ().getColumnaElemento () - 1);
+            getPieza ().setColumna (getPieza ().getColumna () - 1);
+            getPieza ().getAdyacente ().setColumnaElemento (getPieza ().getAdyacente ().getColumnaElemento () - 1);
+            getPieza ().getExtremo ().setColumnaElemento (getPieza ().getExtremo ().getColumnaElemento () - 1);
+        }
+    }
+
+    //mueve una pieza auxiliar y comprueba cada elemento para ver si ha colisionado
+    //true si se puede mover sin colision; si no false
     public boolean checkearMovimiento (Pieza piezaAux) {
         boolean result = true;
         if (getMatriz () [piezaAux.getAislado ().getFilaElemento ()][piezaAux.getAislado ().getColumnaElemento ()].equals ("1") ||

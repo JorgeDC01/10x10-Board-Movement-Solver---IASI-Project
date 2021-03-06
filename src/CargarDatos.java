@@ -2,33 +2,54 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Esta clase lee del fichero de entrada e inicializa las instancias del tablero.
+ */
+
 public class CargarDatos {
     private String nombreFichero;
-    /*
-        Constructor por defecto del cargarDatos.
+
+
+    /**
+     * Constructor por defecto de la clase.
      */
-    public CargarDatos(){ nombreFichero = "";}
-    /*
-        Almacena el nombre del fichero elegido para ejecutar los algoritmos en el objeto tablero, añadiéndole la ruta Ficheros/...
-        @param nombreFichero El nombre del fichero.
+
+    public CargarDatos () {
+        nombreFichero = "";
+    }
+
+    /**
+     * Almacena el nombre del fichero elegido para ejecutar los algoritmos en el objeto tablero, añadiéndole la ruta Ficheros/...
+     * @param nombreFichero el nombre del fichero
      */
-    public void setNombreFichero(String nombreFichero){ this.nombreFichero = "Ficheros/" + nombreFichero; }
-    /*
-        Devuelve el nombre de la ruta del fichero donde está descrito el laberinto.
-        @return La ruta del fichero del laberinto a cargar.
+
+    public void setNombreFichero (String nombreFichero) {
+        this.nombreFichero = "Ficheros/" + nombreFichero;
+    }
+
+    /**
+     * Devuelve el nombre de la ruta del fichero donde están escritos los datos de entrada.
+     * @return String el nombre del fichero
      */
-    public String getNombreFichero(){ return this.nombreFichero;}
-    /*
-       Carga el nombre del fichero que contiene el laberinto en una matriz de strings.
-       @param fichero El nombre del fichero como un string.
-    */
-    public  void CargaDeFichero(String fichero) throws IOException {
-        setNombreFichero(fichero);
-        String linea;
-        FileReader f = new FileReader(getNombreFichero());
+
+    public String getNombreFichero () {
+        return nombreFichero;
+    }
+
+
+    /**
+     * Carga el nombre del fichero que contiene el laberinto en una matriz de String.
+     * @param nombreFichero es el nombre del fichero a leer.
+     * @throws IOException
+     */
+    public  void CargaDeFichero (String nombreFichero) throws IOException {
+        setNombreFichero(nombreFichero);
+        String linea = "";
+        FileReader f = new FileReader (getNombreFichero());
         BufferedReader b = new BufferedReader(f);
         String[] vector;
         int indiceFila = 0;
+
         while((linea = b.readLine()) != null && (indiceFila <= 9)) {
             int indiceColumna = 0;
             vector = linea.split(",");
@@ -38,18 +59,22 @@ public class CargarDatos {
             }
             indiceFila++;
         }
-        Tablero.getInstance().showLaberinto();
         b.close();
+        //Tablero.getInstance().showLaberinto();
         inicializarPieza("2");
         inicializarPieza("3");
+
     }
-    /*
-        Recorre el tablero hasta que encuentra el primer elemento de la pieza. A continuacion, comprueba si es el vértice llamando a
-        comprobarVertice. En caso afirmativo, muestra la pieza por pantalla.
-        @param tipoPieza el número de las casillas de la pieza a inicializar y almacenar en el tablero. "2" si es la pieza en movimiento y "3" si es la objetivo.
-    */
-    public void inicializarPieza(String tipoPieza){
-        boolean esVertice=false;
+
+
+    /**
+     * Recorre el tablero hasta que encuentra el primer elemento de la pieza. A continuacion, comprueba si es el vértice llamando a
+     *         comprobarVertice. En caso afirmativo, muestra la pieza por pantalla.
+     * @param tipoPieza el número de las casillas de la pieza a inicializar y almacenar en el tablero. "2" si es la pieza en movimiento y "3" si es la objetivo.
+     */
+
+    public void inicializarPieza (String tipoPieza) {
+        boolean esVertice = false;
         for(int i = 1; i < 9 && !esVertice; i++){
             for(int j = 1; j < 9 && !esVertice; j++){
                 if(Tablero.getInstance().getMatriz()[i][j].equals(tipoPieza)){
@@ -58,7 +83,7 @@ public class CargarDatos {
             }
         }
         // Cargar los elementos de la pieza.
-        
+        /*
         if(esVertice)
             if(tipoPieza.equals("2")){
                 Tablero.getInstance().getPieza().mostrarPieza();
@@ -66,6 +91,7 @@ public class CargarDatos {
             else{
                 Tablero.getInstance().getObjetivo().mostrarPieza();
             }
+            */
     }
 
     /*
@@ -87,10 +113,11 @@ public class CargarDatos {
 
         if(esVertice){
             orientacion = calculoOrientacion(i,j,tipoPieza);
-            if(tipoPieza.equals("2"))
-                Tablero.getInstance().setPieza(new Pieza(i,j,orientacion));
+            if(tipoPieza.equals("2")) {
+                Tablero.getInstance().setPieza(new Pieza(new Elemento (i, j),orientacion));
+            }
             else{
-                Tablero.getInstance().setObjetivo(new Pieza(i,j,orientacion));
+                Tablero.getInstance().setObjetivo(new Pieza(new Elemento (i, j),orientacion));
             }
         }
         return esVertice;

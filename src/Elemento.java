@@ -1,22 +1,66 @@
+/**
+ * Esta clase define lo que es un elemento, es decir, los componentes de la pieza.
+ */
+
 public class Elemento {
+    private int filaElemento; //Indica la fila de la matriz donde está el elemento.
+    private int columnaElemento; //Indica la columna de la matriz donde está el elemento.
 
-    private int filaElemento;
-    private int columnaElemento;
+    /**
+     * Constructor por defecto de la clase.
+     */
 
-    public Elemento(){
-        this.filaElemento = 0;
-        this.columnaElemento = 0;
+    public Elemento () {
+        filaElemento = 0;
+        columnaElemento = 0;
     }
-    public Elemento(int filaElemento, int columnaElemento){
+
+    /**
+     *
+     */
+
+    public Elemento (int fila, int columna) {
+        setFilaElemento (fila);
+        setColumnaElemento (columna);
+    }
+
+
+    /**
+     * Devuelve la fila donde se encuentra el elemento.
+     * @return int la fila del elemento
+     */
+
+    public int getFilaElemento () {
+        return filaElemento;
+    }
+
+
+    /**
+     * Devuelve la columna donde se encuentra el elmento.
+     * @return int la columna del elemento.
+     */
+
+    public int getColumnaElemento () {
+        return columnaElemento;
+    }
+
+
+    /**
+     * Inicializa el valor de la fila del elemento con el parámetro de entrada.
+     * @param filaElemento
+     */
+
+    public void setFilaElemento (int filaElemento) {
         this.filaElemento = filaElemento;
+    }
+
+
+    /**
+     * Inicializa el valor de la columna del elemento con el parámetro de entrada.
+     * @param columnaElemento
+     */
+
+    public void setColumnaElemento (int columnaElemento) {
         this.columnaElemento = columnaElemento;
     }
-    public int getFilaElemento(){return this.filaElemento;}
-    public int getColumnaElemento(){return this.columnaElemento;}
-    public void setFilaElemento(int filaElemento) { this.filaElemento = filaElemento; }
-    public void setColumnaElemento(int columnaElemento) { this.columnaElemento = columnaElemento; }
-    public void inicializarElemento(){
-
-    }
-
 }

@@ -1,0 +1,141 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class NodoArbol {
+    private Pieza pieza;
+    private int heuristica;
+    private NodoArbol padre;
+    private String operacion;
+    private List <NodoArbol> hijos;
+
+
+    /*
+        Constructor parametrizado dada la pieza y el estado padre.
+        @param pieza La pieza que representa el estado.
+        @param padre El estado padre del estado.
+     */
+
+    public NodoArbol (Pieza pieza, NodoArbol padre, String operacion){
+        this.pieza = pieza;
+        this.heuristica = calcularHeuristica ();
+        this.padre = padre;
+        this.hijos = new ArrayList <NodoArbol> ();
+        this.operacion = operacion;
+    }
+
+
+    /*
+        Devuelve la pieza del nodo.
+        @return La pieza.
+     */
+
+    public Pieza getPieza(){
+        return pieza;
+    }
+
+
+    /*
+        Devuelve los hijos del estado actual.
+        @return Lista de hijos
+     */
+
+    public List<NodoArbol> getHijos(){
+        return hijos;
+    }
+
+
+    /*
+        Devuelve el estado padre del nodo.
+        @return nodoArbol El nodo padre.
+     */
+
+    public NodoArbol getPadre(){
+        return padre;
+    }
+
+
+    /*
+        Devuelve la heurística del estado con respecto el estado objetivo.
+        @return int La heurística que indica la proximidad con respecto el estado objetivo.
+     */
+
+    public int getHeuristica(){
+        return heuristica;
+    }
+
+
+    /*
+        Añade un nuevo hijo al nodo.
+        @param pieza La pieza hija del estado.
+     */
+
+    public void anadirHijo (Pieza pieza, String operacion) {
+        if (pieza != null) {
+            getHijos().add(new NodoArbol (pieza,this, operacion));
+        }
+    }
+
+    /**
+     * Calcula el valor de la heurística del nodo.
+     * @return int el valor de h'
+     */
+
+    public int calcularHeuristica () {
+        int filaObjetivo = Tablero.getInstance().getObjetivo ().getVertice ().getFilaElemento ();
+        int columnaObjetivo = Tablero.getInstance().getObjetivo().getVertice().getColumnaElemento();
+        int filaInicio = pieza.getVertice().getFilaElemento();
+        int columnaInicio = pieza.getVertice().getColumnaElemento();
+
+        int rotaciones = 0;
+        boolean enc = false;
+        for (int i = 0; (i < 4) && (!enc); i++) {
+            if (pieza.getOrientacion ().equals (Tablero.getInstance().getObjetivo ().getOrientacion())) {
+                enc = true;
+                if (rotaciones > 0) {
+                    for (int j = 0; j < (4 - rotaciones); j++) {
+                        tickRotacion();
+                    }
+                }
+            }
+            else {
+                tickRotacion();
+                rotaciones++;
+            }
+        }
+        return (Math.abs (filaObjetivo - filaInicio) + Math.abs (columnaObjetivo - columnaInicio) + rotaciones);
+    }
+
+    public void tickRotacion () {
+        switch (pieza.getOrientacion()) {
+            case "A":
+                pieza.setOrientacion ("D");
+                break;
+            case "B":
+                pieza.setOrientacion ("I");
+                break;
+            case "I":
+                pieza.setOrientacion ("A");
+                break;
+            case "D":
+                pieza.setOrientacion ("B");
+                break;
+        }
+    }
+
+    public String getOperacion () {
+        return operacion;
+    }
+
+    public String mostrarDatos () {
+        String resultado = "";
+        if (getHijos ().size() != 0) {
+            for (NodoArbol n: getHijos()) {
+                resultado = "Hijos: " + n.operacion;
+            }
+        }
+        else {
+            resultado = "No hijos";
+        }
+        return resultado;
+    }
+}

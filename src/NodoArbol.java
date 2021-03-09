@@ -43,6 +43,14 @@ public class NodoArbol {
         return hijos;
     }
 
+    /*
+        Set de los hijos del nodo actual
+        @param listaHijos Una lista de hijos
+     */
+
+    public void setHijos(List<NodoArbol> listaHijos){
+        this.hijos = listaHijos;
+    }
 
     /*
         Devuelve el estado padre del nodo.
@@ -53,7 +61,14 @@ public class NodoArbol {
         return padre;
     }
 
+    /*
+        Enlaza el nodo actual con su padre.
+        @param padre El nodo padre
+     */
 
+    public void setPadre(NodoArbol padre){
+        this.padre = padre;
+    }
     /*
         Devuelve la heurística del estado con respecto el estado objetivo.
         @return int La heurística que indica la proximidad con respecto el estado objetivo.
@@ -63,17 +78,6 @@ public class NodoArbol {
         return heuristica;
     }
 
-
-    /*
-        Añade un nuevo hijo al nodo.
-        @param pieza La pieza hija del estado.
-     */
-
-    public void anadirHijo (Pieza pieza, String operacion) {
-        if (pieza != null) {
-            getHijos().add(new NodoArbol (pieza,this, operacion));
-        }
-    }
 
     /**
      * Calcula el valor de la heurística del nodo.
@@ -127,10 +131,10 @@ public class NodoArbol {
     }
 
     public String mostrarDatos () {
-        String resultado = "";
+        String resultado = "Hijos: ";
         if (getHijos ().size() != 0) {
             for (NodoArbol n: getHijos()) {
-                resultado = "Hijos: " + n.operacion;
+                resultado = resultado + n.operacion + " - ";
             }
         }
         else {

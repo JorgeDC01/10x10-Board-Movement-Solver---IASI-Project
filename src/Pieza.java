@@ -152,6 +152,6 @@ public class Pieza {
      */
 
     public Pieza clonarPieza () {
-        return new Pieza (getVertice(), getOrientacion());
+        return new Pieza (getVertice().clonarElemento(), getOrientacion());
     }
 }

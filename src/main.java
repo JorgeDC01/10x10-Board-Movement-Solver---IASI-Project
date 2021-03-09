@@ -5,5 +5,4 @@ public class main {
         carga.CargaDeFichero("ROTAL1.txt");
         new EscaladaMaxPend(Tablero.getInstance().getPieza());
     }
-
 }

@@ -60,7 +60,7 @@ public class CargarDatos {
             indiceFila++;
         }
         b.close();
-        //Tablero.getInstance().showLaberinto();
+        Tablero.getInstance().showLaberinto();
         inicializarPieza("2");
         inicializarPieza("3");
 
@@ -83,7 +83,7 @@ public class CargarDatos {
             }
         }
         // Cargar los elementos de la pieza.
-        /*
+
         if(esVertice)
             if(tipoPieza.equals("2")){
                 Tablero.getInstance().getPieza().mostrarPieza();
@@ -91,7 +91,6 @@ public class CargarDatos {
             else{
                 Tablero.getInstance().getObjetivo().mostrarPieza();
             }
-            */
     }
 
     /*

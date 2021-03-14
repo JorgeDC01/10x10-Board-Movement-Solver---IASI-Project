@@ -43,6 +43,8 @@ public class CargarDatos {
      * @throws IOException
      */
     public  void CargaDeFichero (String nombreFichero) throws IOException {
+
+        System.out.println("FICHERO - " + nombreFichero);
         setNombreFichero(nombreFichero);
         String linea = "";
         FileReader f = new FileReader (getNombreFichero());
@@ -63,7 +65,6 @@ public class CargarDatos {
         Tablero.getInstance().showLaberinto();
         inicializarPieza("2");
         inicializarPieza("3");
-
     }
 
 
@@ -86,9 +87,11 @@ public class CargarDatos {
 
         if(esVertice)
             if(tipoPieza.equals("2")){
+                System.out.println("Pieza origen...");
                 Tablero.getInstance().getPieza().mostrarPieza();
             }
             else{
+                System.out.println("Pieza objetivo...");
                 Tablero.getInstance().getObjetivo().mostrarPieza();
             }
     }

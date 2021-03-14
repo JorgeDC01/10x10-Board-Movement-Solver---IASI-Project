@@ -89,7 +89,7 @@ public class Tablero {
         StringBuilder stringbuilder = new StringBuilder();
         for(int i = 0; i < this.matriz.length; i++) {
             for (int j = 0; j < this.matriz.length; j++) {
-                stringbuilder.append(matriz[i][j]);
+                stringbuilder.append(matriz[i][j] + " ");
             }
             stringbuilder.append("\n");
         }

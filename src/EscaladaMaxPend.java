@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 public class EscaladaMaxPend {
     private Arbol arbol;
@@ -64,20 +62,45 @@ public class EscaladaMaxPend {
      */
 
     public void ordenarHijos(){
-        Collections.sort(actual.getHijos(), new MenorHeuristica());
+        Collections.sort(actual.getHijos(), Collections.reverseOrder(new MenorHeuristica()));
+    }
+    /*
+
+     */
+    public void mostrarSolucion(){
+        actual = arbol.getRaiz();
+        String resultado = "";
+        while(actual.getHijos().size() != 0){
+            actual = actual.getHijos().get(0);
+            resultado = resultado + actual.getOperacion() + ", ";
+
+        }
+        System.out.println("Secuencia solucion: " + resultado);
     }
 
     public void ejecutar () {
-        /*while(actual.calcularHeuristica() != 0){
+        long inicio = System.currentTimeMillis();
+        System.out.println("--- Algoritmo Escalada Máxima Pendiente ---");
+        boolean finBucle = false;
+        while(actual.calcularHeuristica() != 0 && !finBucle){
             expansionCompleta();
             ordenarHijos();
             //Eleccion mejor h'
-        }*/
-
-        expansionCompleta();
-        ordenarHijos();
-        System.out.println ("Hijos de raiz: " + arbol.getRaiz().mostrarDatos());
-        System.out.println ("Hijos de actual: " + actual.mostrarDatos());
-
+            actual = actual.getHijos().get(0);
+            if(actual.getHeuristica() > actual.getPadre().getHeuristica() || actual == null){
+                finBucle = true;
+            }
+        }
+        if(actual.getHeuristica() == 0){
+            mostrarSolucion();
+            System.out.println("Número de nodos generados: " + getNodosGenerados());
+        }
+        else{
+            System.out.println("No se ha encontrado una solución...");
+            System.out.println("Número de nodos generados: " + getNodosGenerados());
+        }
+        long fin = System.currentTimeMillis();
+        double tiempo = (double) (fin - inicio);
+        System.out.println("Tiempo en ejecutarse Escalada de Maxima pendiente: " + tiempo + " milisegundos.");
     }
 }

@@ -5,10 +5,15 @@ public class PrimeroMejor {
     private Arbol arbol;
     private NodoArbol actual; //Puntero para recorrer el arbol.
     private int nodosGenerados;
-    private Queue<NodoArbol> nodosAbiertos = new PriorityQueue<NodoArbol>();
-    private List<NodoArbol> nodosCerrados = new ArrayList<NodoArbol>();
+    private Queue<NodoArbol> nodosAbiertos = new PriorityQueue<>();
+    private Set<NodoArbol> nodosCerrados = new HashSet<NodoArbol>();
 
-    public PrimeroMejor(){
+    public PrimeroMejor(Pieza pieza){
+        arbol = new Arbol(pieza);
+        actual = arbol.getRaiz();
+        nodosGenerados = 1;
+        nodosAbiertos.add(actual);
+        ejecutar();
 
     }
 
@@ -28,27 +33,59 @@ public class PrimeroMejor {
 
     public void setNodosAbiertos(Queue<NodoArbol> nodosAbiertos) { this.nodosAbiertos = nodosAbiertos; }
 
-    public List<NodoArbol> getNodosCerrados() { return nodosCerrados; }
+    public Set<NodoArbol> getNodosCerrados() { return nodosCerrados; }
 
-    public void setNodosCerrados(List<NodoArbol> nodosCerrados) { this.nodosCerrados = nodosCerrados; }
+    public void setNodosCerrados(Set<NodoArbol> nodosCerrados) { this.nodosCerrados = nodosCerrados; }
 
     /*
+       Expande del nodo actual con todos sus operadores para posteriormente elegir la menor h'
+    */
+    public void expansionCompleta(){
+        NodoArbol hijo = Tablero.getInstance().moverArriba(actual.getPieza());
 
+        if(hijo != null){
+            hijo.setPadre(actual);
+            nodosGenerados++;
+            actual.getHijos().add(hijo);
+        }
+        hijo = Tablero.getInstance().moverDerecha(actual.getPieza());
+        if(hijo != null){
+            hijo.setPadre(actual);
+            nodosGenerados++;
+            actual.getHijos().add(hijo);
+        }
+        hijo = Tablero.getInstance().moverAbajo(actual.getPieza());
+        if(hijo != null){
+            hijo.setPadre(actual);
+            nodosGenerados++;
+            actual.getHijos().add(hijo);
+        }
+        hijo = Tablero.getInstance().moverIzquierda(actual.getPieza());
+        if(hijo != null){
+            hijo.setPadre(actual);
+            nodosGenerados++;
+            actual.getHijos().add(hijo);
+        }
+        hijo = Tablero.getInstance().rotar(actual.getPieza());
+        if(hijo != null){
+            hijo.setPadre(actual);
+            nodosGenerados++;
+            actual.getHijos().add(hijo);
+        }
+    }
+
+    /*
+        Algoritmo de Primero Mejor.
      */
     public void ejecutar(){
 
      System.out.println("--- Algoritmo Primero Mejor ---");
-        // expando hijos
-        // meto el actual expandido a la lista de cerrados
-        // meto los hijos en lista de abiertos y ordeno
-        // elijo el mejor en actual
 
-
-
-
-
-
+        /*while((listaAbiertos no esté vacia) && (no se encuentre la sol))
+            Expandir hijos del nodo actual
+            Inserto todos los hijos en la lista de abiertos, pero antes comprobar que no se repiten en ambos listas
+            Inserto el actual en la lista de cerrados
+            Elijo el mejor de la lista de abiertos y se lo asigno a actual
+         */
     }
-
-
 }

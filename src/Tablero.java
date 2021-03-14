@@ -89,7 +89,7 @@ public class Tablero {
         StringBuilder stringbuilder = new StringBuilder();
         for(int i = 0; i < this.matriz.length; i++) {
             for (int j = 0; j < this.matriz.length; j++) {
-                stringbuilder.append(matriz[i][j]);
+                stringbuilder.append(matriz[i][j] + " ");
             }
             stringbuilder.append("\n");
         }
@@ -136,68 +136,68 @@ public class Tablero {
      * Mueve la pieza una posición hacia arriba.
      */
 
-    public Pieza moverArriba (Pieza pieza) {
-        Pieza piezaAux = new Pieza (pieza.getVertice(), pieza.getOrientacion ());
+    public NodoArbol moverArriba (Pieza pieza) {
+        Pieza piezaAux = pieza.clonarPieza();
         piezaAux.getAislado ().setFilaElemento (piezaAux.getAislado ().getFilaElemento () - 1);
         piezaAux.getVertice ().setFilaElemento (piezaAux.getVertice().getFilaElemento() - 1);
         piezaAux.getAdyacente ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento () - 1);
         piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () - 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return piezaAux;
+            return new NodoArbol(piezaAux,null,"A");
         }
         else {
             return null;
         }
     }
 
-    public Pieza moverAbajo (Pieza pieza) {
-        Pieza piezaAux = new Pieza (pieza.getVertice(), pieza.getOrientacion ());
+    public NodoArbol moverAbajo (Pieza pieza) {
+        Pieza piezaAux = pieza.clonarPieza();
         piezaAux.getAislado ().setFilaElemento (piezaAux.getAislado ().getFilaElemento () + 1);
         piezaAux.getVertice ().setFilaElemento (piezaAux.getVertice().getFilaElemento() + 1);
         piezaAux.getAdyacente ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento () + 1);
         piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () + 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return piezaAux;
+            return new NodoArbol(piezaAux,null,"B");
         }
         else {
             return null;
         }
     }
 
-    public Pieza moverDerecha (Pieza pieza) {
-        Pieza piezaAux = new Pieza (pieza.getVertice(), pieza.getOrientacion ());
+    public NodoArbol moverDerecha (Pieza pieza) {
+        Pieza piezaAux = pieza.clonarPieza();
         piezaAux.getAislado ().setColumnaElemento (piezaAux.getAislado ().getColumnaElemento () + 1);
         piezaAux.getVertice ().setColumnaElemento (piezaAux.getVertice().getColumnaElemento() + 1);
         piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () + 1);
         piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () + 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return piezaAux;
+            return new NodoArbol(piezaAux,null,"D");
         }
         else {
             return null;
         }
     }
 
-    public Pieza moverIzquierda (Pieza pieza) {
-        Pieza piezaAux = new Pieza (pieza.getVertice(), pieza.getOrientacion ());
+    public NodoArbol moverIzquierda (Pieza pieza) {
+        Pieza piezaAux = pieza.clonarPieza();
         piezaAux.getAislado ().setColumnaElemento (piezaAux.getAislado ().getColumnaElemento () - 1);
         piezaAux.getVertice ().setColumnaElemento (piezaAux.getVertice().getColumnaElemento() - 1);
         piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () - 1);
         piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () - 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return piezaAux;
+            return new NodoArbol(piezaAux,null,"I");
         }
         else {
             return null;
         }
     }
 
-    public Pieza rotar (Pieza pieza) {
-        Pieza piezaAux = new Pieza (pieza.getVertice(), pieza.getOrientacion ());
+    public NodoArbol rotar (Pieza pieza) {
+        Pieza piezaAux = pieza.clonarPieza();
         String orientacion = piezaAux.getOrientacion();
 
         switch (orientacion) {
@@ -257,7 +257,7 @@ public class Tablero {
                 break;
         }
         if (checkearMovimiento (piezaAux)) {
-            return piezaAux;
+            return new NodoArbol(piezaAux,null,"R");
         }
         else {
             return null;

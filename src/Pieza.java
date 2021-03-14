@@ -144,6 +144,7 @@ public class Pieza {
         System.out.println ("AISLADO: "+getAislado().getFilaElemento() + " - " + getAislado().getColumnaElemento());
         System.out.println ("ADYACENTE: " + getAdyacente ().getFilaElemento () + " - " + getAdyacente().getColumnaElemento());
         System.out.println ("EXTREMO: " + getExtremo().getFilaElemento() + " - " + getExtremo().getColumnaElemento());
+        System.out.println("");
     }
 
     /**
@@ -152,6 +153,6 @@ public class Pieza {
      */
 
     public Pieza clonarPieza () {
-        return new Pieza (getVertice(), getOrientacion());
+        return new Pieza (getVertice().clonarElemento(), getOrientacion());
     }
 }

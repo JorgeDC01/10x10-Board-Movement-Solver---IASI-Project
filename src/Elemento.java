@@ -15,7 +15,7 @@ public class Elemento {
         columnaElemento = 0;
     }
 
-    /**
+    /*
      *
      */
 
@@ -62,5 +62,12 @@ public class Elemento {
 
     public void setColumnaElemento (int columnaElemento) {
         this.columnaElemento = columnaElemento;
+    }
+
+    /*
+        Clonar
+     */
+    public Elemento clonarElemento(){
+        return new Elemento(this.filaElemento,this.columnaElemento);
     }
 }

@@ -62,7 +62,7 @@ public class EscaladaMaxPend {
      */
 
     public void ordenarHijos(){
-        Collections.sort(actual.getHijos(), Collections.reverseOrder(new MenorHeuristica()));
+        Collections.sort(actual.getHijos(), new MenorHeuristica());
     }
     /*
 

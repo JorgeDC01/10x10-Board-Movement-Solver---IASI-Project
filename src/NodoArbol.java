@@ -142,4 +142,23 @@ public class NodoArbol {
         }
         return resultado;
     }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result = 7 * result +this.getPieza().hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof NodoArbol)) {
+            return false;
+        } else {
+            NodoArbol other = (NodoArbol) obj;
+            return getPieza().equals(other.getPieza());
+        }
+    }
 }

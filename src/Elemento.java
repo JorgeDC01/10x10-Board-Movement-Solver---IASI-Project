@@ -70,4 +70,28 @@ public class Elemento {
     public Elemento clonarElemento(){
         return new Elemento(this.filaElemento,this.columnaElemento);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        else if (!(obj instanceof Elemento)) {
+            return false;
+        }
+        else {
+            Elemento other = (Elemento) obj;
+            return this.filaElemento == other.getFilaElemento() && this.columnaElemento == other.getColumnaElemento();
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 19;
+        result = 3 * result + this.filaElemento;
+        result = 23 * result + this.columnaElemento;
+        return result;
+    }
 }
+
+

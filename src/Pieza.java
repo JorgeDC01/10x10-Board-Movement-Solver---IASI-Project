@@ -155,4 +155,24 @@ public class Pieza {
     public Pieza clonarPieza () {
         return new Pieza (getVertice().clonarElemento(), getOrientacion());
     }
+
+    @Override
+    public int hashCode() {
+        int result = 13;
+        result = 11 * result + getVertice().hashCode();
+        result = 5 * result + getOrientacion().hashCode();
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (!(obj instanceof Pieza)) {
+            return false;
+        } else {
+            Pieza other = (Pieza) obj;
+            return this.orientacion.equals(other.getOrientacion()) && getVertice().equals(other.getVertice());
+        }
+    }
 }

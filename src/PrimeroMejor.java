@@ -127,6 +127,6 @@ public class PrimeroMejor {
         }
         long fin = System.currentTimeMillis();
         double tiempo = (double) (fin - inicio);
-        System.out.println("Tiempo en ejecutarse Escalada de Maxima pendiente: " + tiempo + " milisegundos.");
+        System.out.println("Tiempo en ejecutarse Primero Mejor: " + tiempo + " milisegundos.");
     }
 }

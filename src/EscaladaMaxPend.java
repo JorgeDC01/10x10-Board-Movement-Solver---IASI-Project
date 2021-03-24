@@ -82,7 +82,7 @@ public class EscaladaMaxPend {
         long inicio = System.currentTimeMillis();
         System.out.println("--- Algoritmo Escalada Máxima Pendiente ---");
         boolean finBucle = false;
-        while(actual.calcularHeuristica() != 0 && !finBucle){
+        while(actual.getHeuristica() != 0 && !finBucle){
             expansionCompleta();
             ordenarHijos();
             //Eleccion mejor h'

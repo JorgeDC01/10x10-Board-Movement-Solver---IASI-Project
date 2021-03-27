@@ -22,7 +22,7 @@ public class Main {
 
     public static void main (String[] args) throws IOException {
         CargarDatos carga = new CargarDatos ();
-        carga.CargaDeFichero ("ROTAL1.txt");
+        carga.cargaDeFichero ("ROTAL1.txt");
         new EscaladaMaxPend (Tablero.getInstance ().getMovil ());
         new PrimeroMejor (Tablero.getInstance ().getMovil ());
     }

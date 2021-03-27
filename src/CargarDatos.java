@@ -3,14 +3,18 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * Esta clase lee del fichero de entrada e inicializa las instancias del tablero.
+ * Nombre: CargarDatos
+ * Esta clase lee del fichero de entrada e inicializa las instancias del Tablero.
+ *
+ * @version 1.0
+ * @author Jorge Del Castillo Gómez, Eduardo Cano García y Raúl Hormigo Cerón.
  */
 
 public class CargarDatos {
     private String nombreFichero;
 
-
     /**
+     * Nombre: CargarDatos
      * Constructor por defecto de la clase.
      */
 
@@ -18,18 +22,29 @@ public class CargarDatos {
         nombreFichero = "";
     }
 
+
     /**
-     * Almacena el nombre del fichero elegido para ejecutar los algoritmos en el objeto tablero, añadiéndole la ruta Ficheros/...
-     * @param nombreFichero el nombre del fichero
+     * Nombre: setNombreFichero
+     * @param nombreFichero el nombre del fichero.
+     *
+     * Almacena el nombre del fichero elegido para ejecutar los algoritmos en el objeto Tablero,
+     * añadiéndole la ruta "Ficheros/..."
+     *
+     * El método no devuelve nada.
      */
 
     public void setNombreFichero (String nombreFichero) {
         this.nombreFichero = "Ficheros/" + nombreFichero;
     }
 
+
     /**
+     * Nombre: getNombreFichero
+     * @return String
+     *
      * Devuelve el nombre de la ruta del fichero donde están escritos los datos de entrada.
-     * @return String el nombre del fichero
+     *
+     * El String devuelto es el nombre del fichero.
      */
 
     public String getNombreFichero () {
@@ -38,107 +53,128 @@ public class CargarDatos {
 
 
     /**
-     * Carga el nombre del fichero que contiene el laberinto en una matriz de String.
+     * Nombre: cargaDeFichero
      * @param nombreFichero es el nombre del fichero a leer.
      * @throws IOException
+     *
+     * Carga el nombre del fichero que contiene el laberinto en una matriz de String.
+     *
+     * Este método no devuelve nada.
      */
-    public  void CargaDeFichero (String nombreFichero) throws IOException {
-
-        System.out.println("FICHERO - " + nombreFichero);
-        setNombreFichero(nombreFichero);
+    public void cargaDeFichero (String nombreFichero) throws IOException {
+        System.out.println ("FICHERO - " + nombreFichero);
+        setNombreFichero (nombreFichero);
         String linea = "";
-        FileReader f = new FileReader (getNombreFichero());
-        BufferedReader b = new BufferedReader(f);
-        String[] vector;
+        FileReader f = new FileReader (getNombreFichero ());
+        BufferedReader b = new BufferedReader (f);
+        String [] vector;
         int indiceFila = 0;
 
-        while((linea = b.readLine()) != null && (indiceFila <= 9)) {
+        while ((linea = b.readLine()) != null && (indiceFila <= 9)) {
             int indiceColumna = 0;
-            vector = linea.split(",");
-            for(String casilla: vector){
-                Tablero.getInstance().getMatriz()[indiceFila][indiceColumna] =  casilla;
+            vector = linea.split (",");
+            for (String casilla: vector) {
+                Tablero.getInstance ().getMatriz () [indiceFila][indiceColumna] =  casilla;
                 indiceColumna++;
             }
             indiceFila++;
         }
-        b.close();
-        Tablero.getInstance().showLaberinto();
-        inicializarPieza("2");
-        inicializarPieza("3");
+        b.close ();
+        Tablero.getInstance ().showLaberinto ();
+        inicializarPieza ("2");
+        inicializarPieza ("3");
     }
 
 
     /**
-     * Recorre el tablero hasta que encuentra el primer elemento de la pieza. A continuacion, comprueba si es el vértice llamando a
-     *         comprobarVertice. En caso afirmativo, muestra la pieza por pantalla.
-     * @param tipoPieza el número de las casillas de la pieza a inicializar y almacenar en el tablero. "2" si es la pieza en movimiento y "3" si es la objetivo.
+     * Nombre: inicializarPieza.
+     * @param tipoPieza el carácter que indica el tipo de Pieza: "2" es la Pieza móvil, "3" es la Pieza objetivo.
+     *
+     * Encuentra e inicializa las Piezas del Tablero con los datos correspondientes.
+     *
+     * Este método no devuelve nada.
      */
 
     public void inicializarPieza (String tipoPieza) {
         boolean esVertice = false;
-        for(int i = 1; i < 9 && !esVertice; i++){
-            for(int j = 1; j < 9 && !esVertice; j++){
-                if(Tablero.getInstance().getMatriz()[i][j].equals(tipoPieza)){
-                    esVertice = insertarVerticeEnPieza(i, j, tipoPieza);
+        for (int i = 1; i < 9 && !esVertice; i++) {
+            for (int j = 1; j < 9 && !esVertice; j++) {
+                if (Tablero.getInstance ().getMatriz () [i][j].equals (tipoPieza)){
+                    esVertice = insertarVerticeEnPieza (i, j, tipoPieza);
                 }
             }
         }
-        // Cargar los elementos de la pieza.
 
-        if(esVertice)
-            if(tipoPieza.equals("2")){
-                System.out.println("Pieza origen...");
-                Tablero.getInstance().getMovil().mostrarPieza();
+        if (esVertice)
+            if (tipoPieza.equals ("2")){
+                System.out.println ("Pieza origen...");
+                Tablero.getInstance ().getMovil ().mostrarPieza ();
             }
             else{
-                System.out.println("Pieza objetivo...");
-                Tablero.getInstance().getObjetivo().mostrarPieza();
+                System.out.println ("Pieza objetivo...");
+                Tablero.getInstance ().getObjetivo ().mostrarPieza ();
             }
     }
 
-    /*
-        Comprueba si la casilla de la fila i y columna j del tablero es el vertice de la pieza. En caso afirmativo, inicializa la pieza y la almacena en el tablero.
-        @param i La fila de la casilla a comprobar.
-        @param j La columna de la casilla a comprobar.
-        @param tipoPieza La pieza en la que se encuentra la casilla (i,j).
-        @return True si la casilla dada por parametro es el vertice de la pieza y False en caso contrario.
+
+    /**
+     * Nombre: insertarVerticeEnPieza
+     * @return boolean
+     * @param i la fila de la casilla.
+     * @param j la columna de la casilla.
+     * @param tipoPieza el tipo de Pieza a generar: "2" si es la móvil, "3" si es la objetivo.
+     *
+     * Indica si la casilla indicada es el vértice o no, y crea la Pieza en caso de que así lo sea.
+     *
+     * El boolean indica "True" si la casilla es el vértice, o "False" si no lo es.
      */
-    public boolean insertarVerticeEnPieza(int i, int j, String tipoPieza) {
+
+    public boolean insertarVerticeEnPieza (int i, int j, String tipoPieza) {
         boolean esVertice = true;
         String orientacion;
-        if(Tablero.getInstance().siEstaVacioOMuro(i,j-1,tipoPieza) && Tablero.getInstance().siEstaVacioOMuro(i, j+1,tipoPieza)){
+        if(Tablero.getInstance ().siEstaVacioOMuro (i,j-1,tipoPieza) &&
+                Tablero.getInstance ().siEstaVacioOMuro (i, j+1,tipoPieza)) {
             esVertice = false;
         }
-        else if(Tablero.getInstance().siEstaVacioOMuro(i-1,j,tipoPieza) && Tablero.getInstance().siEstaVacioOMuro(i+1,j,tipoPieza)){
+        else if (Tablero.getInstance ().siEstaVacioOMuro (i-1,j,tipoPieza) &&
+                Tablero.getInstance ().siEstaVacioOMuro (i+1,j,tipoPieza)) {
             esVertice = false;
         }
 
-        if(esVertice){
-            orientacion = calculoOrientacion(i,j,tipoPieza);
-            if(tipoPieza.equals("2")) {
-                Tablero.getInstance().setMovil(new Pieza(new Elemento (i, j),orientacion));
+        if (esVertice) {
+            orientacion = calculoOrientacion (i,j,tipoPieza);
+            if (tipoPieza.equals ("2")) {
+                Tablero.getInstance ().setMovil (new Pieza (new Elemento (i, j), orientacion));
             }
             else{
-                Tablero.getInstance().setObjetivo(new Pieza(new Elemento (i, j),orientacion));
+                Tablero.getInstance ().setObjetivo (new Pieza (new Elemento (i, j), orientacion));
             }
         }
         return esVertice;
     }
-    /*
-        Calcula la orientacion de la pieza dadas las coordenadas del vertice.
-        @param fila La fila del vertice de la pieza L
-        @param col La columna del vertice de la pieza L
-        @param tipoPieza La pieza en la que se encuentra el vertice.
-        @return String La orientacion de la pieza
+
+
+    /**
+     * Nombre: calculoOrientacion
+     * @return String
+     * @param fila la fila del vértice.
+     * @param col la columna del vértice.
+     * @param tipoPieza el tipo de Pieza sobre la que se calcula la orientación: "2" si es la móvil, "3" si es la objetivo.
+     *
+     * Calcula la orientación de la Pieza dadas las coordenadas del vértice.
+     *
+     * El String indica el carácter que expresa la orientación de la Piza: "A" si es arriba, "B" si es abajo,
+     *                  "I" si es izquierda o "D" si es derecha.
      */
-    public String calculoOrientacion(int fila, int col, String tipoPieza){
-        if( Tablero.getInstance().dentroRango(fila-2) && Tablero.getInstance().getMatriz()[fila-2][col].equals(tipoPieza)){
+
+    public String calculoOrientacion (int fila, int col, String tipoPieza) {
+        if (Tablero.getInstance ().dentroRango (fila-2) && Tablero.getInstance ().getMatriz () [fila-2][col].equals (tipoPieza)) {
             return "A";
         }
-        else if(Tablero.getInstance().dentroRango(fila+2) && Tablero.getInstance().getMatriz()[fila+2][col].equals(tipoPieza)){
+        else if (Tablero.getInstance ().dentroRango (fila+2) && Tablero.getInstance ().getMatriz () [fila+2][col].equals (tipoPieza)) {
             return "B"; // ABAJO
         }
-        else if(Tablero.getInstance().dentroRango(col-2) && Tablero.getInstance().getMatriz()[fila][col-2].equals(tipoPieza)){
+        else if (Tablero.getInstance ().dentroRango (col-2) && Tablero.getInstance ().getMatriz () [fila][col-2].equals (tipoPieza)) {
             return "I";
         }
         else{

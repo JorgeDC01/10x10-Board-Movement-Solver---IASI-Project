@@ -126,7 +126,23 @@ public class Tablero {
         StringBuilder stringbuilder = new StringBuilder ();
         for(int i = 0; i < this.matriz.length; i++) {
             for (int j = 0; j < this.matriz.length; j++) {
-                stringbuilder.append(matriz[i][j] + " ");
+                switch (matriz[i][j]) {
+                    case "1":
+                        stringbuilder.append ("▦");
+                        break;
+                    case "2":
+                        stringbuilder.append ("□");
+                        break;
+                    case "3":
+                        stringbuilder.append ("▣");
+                        break;
+                    case "0":
+                        stringbuilder.append ("▫");
+                        break;
+                    default:
+                        stringbuilder.append(matriz[i][j] + "");
+                        break;
+                }
             }
             stringbuilder.append("\n");
         }

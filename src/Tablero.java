@@ -125,7 +125,7 @@ public class Tablero {
         @return TRUE si está dentro del rango y FALSE en caso contrario
      */
     public boolean dentroRango(int indice){
-        if(indice > 0 && indice < 9){
+        if(indice > 0 && indice < 19){
             return true;
         }
         return false;

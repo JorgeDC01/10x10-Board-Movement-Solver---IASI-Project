@@ -52,7 +52,7 @@ public class CargarDatos {
         String[] vector;
         int indiceFila = 0;
 
-        while((linea = b.readLine()) != null && (indiceFila <= 9)) {
+        while((linea = b.readLine()) != null && (indiceFila <= 19)) {
             int indiceColumna = 0;
             vector = linea.split(",");
             for(String casilla: vector){
@@ -65,6 +65,8 @@ public class CargarDatos {
         Tablero.getInstance().showLaberinto();
         inicializarPieza("2");
         inicializarPieza("3");
+        Tablero.getInstance().getPieza().mostrarPieza();
+        Tablero.getInstance().getObjetivo().mostrarPieza();
     }
 
 
@@ -76,8 +78,8 @@ public class CargarDatos {
 
     public void inicializarPieza (String tipoPieza) {
         boolean esVertice = false;
-        for(int i = 1; i < 9 && !esVertice; i++){
-            for(int j = 1; j < 9 && !esVertice; j++){
+        for(int i = 1; i < 19 && !esVertice; i++){
+            for(int j = 1; j < 19 && !esVertice; j++){
                 if(Tablero.getInstance().getMatriz()[i][j].equals(tipoPieza)){
                     esVertice = insertarVerticeEnPieza(i, j, tipoPieza);
                 }
@@ -141,8 +143,9 @@ public class CargarDatos {
         else if(Tablero.getInstance().dentroRango(col-2) && Tablero.getInstance().getMatriz()[fila][col-2].equals(tipoPieza)){
             return "I";
         }
-        else{
+        else if(Tablero.getInstance().dentroRango(col+2) && Tablero.getInstance().getMatriz()[fila][col+2].equals(tipoPieza)){
             return "D";
         }
+        return "z";
     }
 }

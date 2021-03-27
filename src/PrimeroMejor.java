@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Collections;
 import java.util.*;
 
@@ -103,7 +104,6 @@ public class PrimeroMejor {
         long inicio = System.currentTimeMillis();
         System.out.println("--- Algoritmo Primero Mejor ---");
         /*while((listaAbiertos no esté vacia) && (no se encuentre la sol))
-
             Expandir hijos del nodo actual
             Inserto todos los hijos en la lista de abiertos, pero antes comprobar que no se repiten en ambos listas
             Inserto el actual en la lista de cerrados
@@ -111,6 +111,7 @@ public class PrimeroMejor {
         */
         boolean solEncontrada = false;
         while (actual != null && !solEncontrada) {
+
             expansionCompleta();
             getNodosCerrados().add(actual);
             actual = getNodosAbiertos().poll();
@@ -127,6 +128,6 @@ public class PrimeroMejor {
         }
         long fin = System.currentTimeMillis();
         double tiempo = (double) (fin - inicio);
-        System.out.println("Tiempo en ejecutarse Escalada de Maxima pendiente: " + tiempo + " milisegundos.");
+        System.out.println("Tiempo en ejecutarse PRIMERO MEJOR: " + tiempo + " milisegundos.");
     }
 }

@@ -30,7 +30,7 @@ public class Tablero {
     private Tablero () {
         pieza = null;
         objetivo = null;
-        matriz = new String [10][10];
+        matriz = new String [20][20];
     }
 
 

@@ -88,7 +88,7 @@ public class CargarDatos {
         if(esVertice)
             if(tipoPieza.equals("2")){
                 System.out.println("Pieza origen...");
-                Tablero.getInstance().getPieza().mostrarPieza();
+                Tablero.getInstance().getMovil().mostrarPieza();
             }
             else{
                 System.out.println("Pieza objetivo...");
@@ -116,7 +116,7 @@ public class CargarDatos {
         if(esVertice){
             orientacion = calculoOrientacion(i,j,tipoPieza);
             if(tipoPieza.equals("2")) {
-                Tablero.getInstance().setPieza(new Pieza(new Elemento (i, j),orientacion));
+                Tablero.getInstance().setMovil(new Pieza(new Elemento (i, j),orientacion));
             }
             else{
                 Tablero.getInstance().setObjetivo(new Pieza(new Elemento (i, j),orientacion));

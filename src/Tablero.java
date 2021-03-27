@@ -1,69 +1,99 @@
-import java.lang.Math;
-
 /**
- * Esta clase define el tablero con la matriz, las piezas, etc.
+ * Nombre: Tablero
+ * Esta clase define el Tablero sobre el que se construyen las Piezas móvil y objetivo, y la matriz donde se
+ * encuentran dichas Piezas y los muros.
+ * Esta clase está implementada utilizando el patrón Singleton, para asegurar que solo existe una instancia de dicho Tablero.
+ *
+ * @version 1.0
+ * @author Jorge Del Castillo Gómez, Eduardo Cano García y Raúl Hormigo Cerón.
  */
 
 public class Tablero {
-    private static Tablero t; //Patrón Singleton, para asegurar que solo exista un tablero en la ejecución del programa.
+    private static Tablero t;
 
-    private String matriz[][]; //Matriz del tablero.
-    private Pieza pieza; //Pieza que se mueve alrededor del tablero.
-    private Pieza objetivo; //Pieza objetivo que hay que imitar.
+    private String matriz[][];
+    private Pieza movil;
+    private Pieza objetivo;
 
-    /*
-        Devyelve el tablero único. Si no ha sido creado, llama al constructor privado. SINGLETON.
-        @return El objeto tablero único.
+
+    /**
+     * Nombre: getInstance.
+     * @return Tablero
+     *
+     * Devuelve un Tablero único; y en caso de no haber sino creado, llama al constructor de la clase.
+     *
+     * El Tablero devuelto es dicha instancia única de la clase.
      */
-    public static Tablero getInstance(){
+
+    public static Tablero getInstance () {
         if(t == null) {
-            t = new Tablero();
+            t = new Tablero ();
         }
         return t;
     }
 
 
-    /*
-        Constructor por defecto del tablero que se usará. Es único.
+    /**
+     * Nombre: Tablero
+     * Constructor por defecto de la clase.
      */
 
     private Tablero () {
-        pieza = null;
+        movil = null;
         objetivo = null;
         matriz = new String [10][10];
     }
 
 
-    /*
-        Asigna la pieza que se mueve al tablero.
-        @param pieza La pieza que se asignará.
+    /**
+     * Nombre: setPieza
+     * @param pieza la nueva Pieza a asignar.
+     *
+     * Asigna la pieza que se mueve al tablero.
+     *
+     * Este método no devuelve nada.
      */
 
-    public void setPieza (Pieza pieza){
-        this.pieza = pieza;
+    public void setMovil (Pieza pieza) {
+        this.movil = pieza;
     }
 
-    /*
-        Asigna la pieza objetivo al tablero.
-        @param pieza La pieza que se asignará.
+
+    /**
+     * Nombre: setObjetivo
+     * @param pieza
+     *
+     * Asigna la pieza objetivo a la del Tablero.
+     *
+     * El método no devuelve nada.
      */
 
-    public void setObjetivo(Pieza pieza) {
+    public void setObjetivo (Pieza pieza) {
         objetivo = pieza;
     }
 
 
-    /*
-        Devuelve la pieza que hay que mover por el tablero hasta dar con la solucion
+    /**
+     * Nombre: getPieza
+     * @return Pieza
+     *
+     * Devuelve la Pieza móvil del Tablero.
+     *
+     * La Pieza devuelta es la móvil del Tablero.
      */
 
-    public Pieza getPieza() {
-        return pieza;
+    public Pieza getMovil () {
+        return movil;
     }
 
 
-    /*
-        Devuelve la posicion en la que tiene que debe estar la pieza para acabar
+    /**
+     * Nombre: getObjetivo
+     * @return Pieza
+     *
+     * Devuelve la Pieza que contiene los datos a los que debe llegar la móvil.
+     *
+     * La Pieza devuelta es la objetivo del Tablero.
      */
 
     public Pieza getObjetivo () {
@@ -71,9 +101,13 @@ public class Tablero {
     }
 
 
-    /*
-       Devuelve el tablero como matriz
-       @return matriz de enteros como tablero
+    /**
+     * Nombre: getMatriz
+     * @return String [][]
+     *
+     * Devuelve la matriz que contiene al Tablero
+     *
+     * La matriz de String devuelta es la del Tablero.
     */
 
     public String[][] getMatriz(){
@@ -81,12 +115,15 @@ public class Tablero {
     }
 
 
-    /*
-        Muestra el tablero por pantalla
+    /**
+     * Nombre: showLaberinto.
+     * Muestra la matriz del Tablero por pantalla.
+     *
+     * El método no devuelve nada.
      */
 
     public void showLaberinto () {
-        StringBuilder stringbuilder = new StringBuilder();
+        StringBuilder stringbuilder = new StringBuilder ();
         for(int i = 0; i < this.matriz.length; i++) {
             for (int j = 0; j < this.matriz.length; j++) {
                 stringbuilder.append(matriz[i][j] + " ");
@@ -96,35 +133,46 @@ public class Tablero {
         System.out.println(stringbuilder.toString());
     }
 
-    /*
-        Comprueba si la casilla de fila y columna está vacia, hay un muro o es una casilla de la posicion de la pieza objetivo.
-        @param fila La fila de la casilla a comprobar
-        @param col La columna de la casilla a comprobar
-        @return Un booleano: TRUE si la casilla es 0,1 o 3 y FALSE en caso contrario.
+
+    /**
+     * Nombre: siEstaVacioOMuro
+     * @return boolean
+     * @param fila la fila que se quiere comprobar.
+     * @param col la columna que se quiere comprobar.
+     * @param tipoPieza el tipo de Pieza de la que se quiere comprobar ("2" la Pieza móvil, "3" la Pieza objetivo).
+     *
+     * Comprueba si la casilla de fila y columna está vacia, hay un muro o es una casilla de la posicion de la Pieza buscada.
+     *
+     * El método devuelve "True" si la casilla contiene "0", "1" o un Elemento de las Piezas móvil y objetivo (buscando siempre la contraria); y "False" en caso contrario.
      */
 
-    public boolean siEstaVacioOMuro(int fila, int col, String tipoPieza){
-        // Si las casillas de la pieza a buscar es 2, entonces hay que comprobar con los muros.
-        String casillasDePieza;
-        if(tipoPieza.equals("2")){
+    public boolean siEstaVacioOMuro (int fila, int col, String tipoPieza) {
+        String casillasDePieza = "";
+        if (tipoPieza.equals ("2")) {
             casillasDePieza = "3";
         }
         else{
             casillasDePieza = "2";
         }
         boolean enc = false;
-        if(this.matriz[fila][col].equals("0") || this.matriz[fila][col].equals("1") || this.matriz[fila][col].equals(casillasDePieza)){
+        if (this.matriz [fila][col].equals ("0") || this.matriz [fila][col].equals ("1") || this.matriz [fila][col].equals (casillasDePieza)) {
             enc = true;
         }
         return enc;
     }
 
-    /*
-        Comprueba si la casilla de fila y col está dentro o fuera de la matriz.
-        @param indice El indice que se va a comprobar si está dentro del rango del tablero
-        @return TRUE si está dentro del rango y FALSE en caso contrario
+
+    /**
+     * Nombre: dentroRango
+     * @return boolean
+     * @param indice el valor a comprobar.
+     *
+     * Comprueba si el valor está dentro del rango de números que controla el tamaño del Tablero.
+     *
+     * Devuelve "True" si está dentro del rango, y "False" en caso contrario.
      */
-    public boolean dentroRango(int indice){
+
+    public boolean dentroRango (int indice) {
         if(indice > 0 && indice < 9){
             return true;
         }
@@ -133,7 +181,13 @@ public class Tablero {
 
 
     /**
-     * Mueve la pieza una posición hacia arriba.
+     * Nombre: moverArriba
+     * @return NodoArbol
+     * @param pieza la Pieza a desplazar.
+     *
+     * Mueve la Pieza una posición hacia arriba.
+     *
+     * El valor devuelto es un Nodo del Árbol con todos las datos ya inicializados.
      */
 
     public NodoArbol moverArriba (Pieza pieza) {
@@ -144,12 +198,23 @@ public class Tablero {
         piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () - 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return new NodoArbol(piezaAux,null,"A");
+            return new NodoArbol (piezaAux,null,"A");
         }
         else {
             return null;
         }
     }
+
+
+    /**
+     * Nombre: moverAbajo
+     * @return NodoArbol
+     * @param pieza la Pieza a desplazar.
+     *
+     * Mueve la Pieza una posición hacia abajo
+     *
+     * El valor devuelto es un Nodo del Árbol con todos las datos ya inicializados.
+     */
 
     public NodoArbol moverAbajo (Pieza pieza) {
         Pieza piezaAux = pieza.clonarPieza();
@@ -159,12 +224,23 @@ public class Tablero {
         piezaAux.getExtremo ().setFilaElemento (piezaAux.getExtremo ().getFilaElemento () + 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return new NodoArbol(piezaAux,null,"B");
+            return new NodoArbol (piezaAux,null,"B");
         }
         else {
             return null;
         }
     }
+
+
+    /**
+     * Nombre: moverDerecha
+     * @return NodoArbol
+     * @param pieza la Pieza a desplazar.
+     *
+     * Mueve la Pieza una posición a la derecha.
+     *
+     * El valor devuelto es un Nodo del Árbol con todos los datos ya inicializados.
+     */
 
     public NodoArbol moverDerecha (Pieza pieza) {
         Pieza piezaAux = pieza.clonarPieza();
@@ -174,12 +250,23 @@ public class Tablero {
         piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () + 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return new NodoArbol(piezaAux,null,"D");
+            return new NodoArbol (piezaAux,null,"D");
         }
         else {
             return null;
         }
     }
+
+
+    /**
+     * Nombre: moverIzquierda
+     * @return NodoArbol
+     * @param pieza la Pieza a desplazar
+     *
+     * Mueve la Pieza una posición a la izquierda.
+     *
+     * El valor devuelto es un Nodo del Árbol con todos los datos ya inicializados.
+     */
 
     public NodoArbol moverIzquierda (Pieza pieza) {
         Pieza piezaAux = pieza.clonarPieza();
@@ -189,106 +276,108 @@ public class Tablero {
         piezaAux.getExtremo ().setColumnaElemento (piezaAux.getExtremo ().getColumnaElemento () - 1);
 
         if (checkearMovimiento (piezaAux)) {
-            return new NodoArbol(piezaAux,null,"I");
+            return new NodoArbol (piezaAux,null,"I");
         }
         else {
             return null;
         }
     }
 
+
+    /**
+     * Nombre: rotar
+     * @return NodoArbol
+     * @param pieza la Pieza a desplazar.
+     *
+     * Rota la Pieza 90º en sentido horario.
+     *
+     * El valor devuelto es un Nodo de Árbol con todos los datos ya inicializados.
+     */
+
     public NodoArbol rotar (Pieza pieza) {
-        Pieza piezaAux = pieza.clonarPieza();
-        String orientacion = piezaAux.getOrientacion();
+        Pieza piezaAux = pieza.clonarPieza ();
+        String orientacion = piezaAux.getOrientacion ();
 
         switch (orientacion) {
             case "A":
-                piezaAux.getAdyacente().setFilaElemento(piezaAux.getAislado().getFilaElemento());
-                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getAislado().getColumnaElemento());
+                piezaAux.getAdyacente ().setFilaElemento (piezaAux.getAislado ().getFilaElemento ());
+                piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getAislado ().getColumnaElemento ());
 
-                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
-                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento() + 1);
+                piezaAux.getExtremo ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento ());
+                piezaAux.getExtremo ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () + 1);
 
-                piezaAux.getAislado().setFilaElemento(piezaAux.getVertice().getFilaElemento()+1);
-                piezaAux.getAislado().setColumnaElemento(piezaAux.getVertice().getColumnaElemento());
+                piezaAux.getAislado ().setFilaElemento (piezaAux.getVertice ().getFilaElemento () + 1);
+                piezaAux.getAislado ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento ());
 
-                piezaAux.setOrientacion("D");
+                piezaAux.setOrientacion ("D");
                 break;
 
             case "B":
-                piezaAux.getAdyacente().setFilaElemento(piezaAux.getVertice().getFilaElemento());
-                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getVertice().getColumnaElemento()-1);
+                piezaAux.getAdyacente ().setFilaElemento (piezaAux.getVertice ().getFilaElemento ());
+                piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento () - 1);
 
-                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento());
-                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento()-1);
+                piezaAux.getExtremo ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento ());
+                piezaAux.getExtremo ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento () - 1);
 
-                piezaAux.getAislado().setFilaElemento(piezaAux.getVertice().getFilaElemento()-1);
-                piezaAux.getAislado().setColumnaElemento(piezaAux.getVertice().getColumnaElemento());
+                piezaAux.getAislado ().setFilaElemento (piezaAux.getVertice ().getFilaElemento () - 1);
+                piezaAux.getAislado ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento ());
 
-                piezaAux.setOrientacion("I");
-
+                piezaAux.setOrientacion ("I");
                 break;
 
             case "I":
-                piezaAux.getAdyacente().setFilaElemento(piezaAux.getVertice().getFilaElemento()-1);
-                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getVertice().getColumnaElemento());
+                piezaAux.getAdyacente ().setFilaElemento (piezaAux.getVertice ().getFilaElemento () - 1);
+                piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento ());
 
-                piezaAux.getExtremo().setFilaElemento(piezaAux.getAdyacente().getFilaElemento()-1);
-                piezaAux.getExtremo().setColumnaElemento(piezaAux.getAdyacente().getColumnaElemento());
+                piezaAux.getExtremo ().setFilaElemento (piezaAux.getAdyacente ().getFilaElemento () - 1);
+                piezaAux.getExtremo ().setColumnaElemento (piezaAux.getAdyacente ().getColumnaElemento ());
 
-                piezaAux.getAislado().setFilaElemento(piezaAux.getVertice().getFilaElemento());
-                piezaAux.getAislado().setColumnaElemento(piezaAux.getVertice().getColumnaElemento()+1);
+                piezaAux.getAislado ().setFilaElemento (piezaAux.getVertice ().getFilaElemento ());
+                piezaAux.getAislado ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento () + 1);
 
-                piezaAux.setOrientacion("A");
-
+                piezaAux.setOrientacion ("A");
                 break;
 
             case "D":
-                piezaAux.getAdyacente().setFilaElemento(piezaAux.getVertice().getFilaElemento()+1);
-                piezaAux.getAdyacente().setColumnaElemento(piezaAux.getVertice().getColumnaElemento());
+                piezaAux.getAdyacente ().setFilaElemento (piezaAux.getVertice ().getFilaElemento () + 1);
+                piezaAux.getAdyacente ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento ());
 
-                piezaAux.getExtremo().setFilaElemento(piezaAux.getVertice().getFilaElemento()+1);
-                piezaAux.getExtremo().setColumnaElemento(piezaAux.getVertice().getColumnaElemento());
+                piezaAux.getExtremo ().setFilaElemento (piezaAux.getVertice ().getFilaElemento () + 1);
+                piezaAux.getExtremo ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento ());
 
-                piezaAux.getAislado().setFilaElemento(piezaAux.getVertice().getFilaElemento());
-                piezaAux.getAislado().setColumnaElemento(piezaAux.getVertice().getColumnaElemento()-1);
+                piezaAux.getAislado ().setFilaElemento (piezaAux.getVertice ().getFilaElemento ());
+                piezaAux.getAislado ().setColumnaElemento (piezaAux.getVertice ().getColumnaElemento () - 1);
 
-                piezaAux.setOrientacion("B");
-
+                piezaAux.setOrientacion ("B");
                 break;
         }
         if (checkearMovimiento (piezaAux)) {
-            return new NodoArbol(piezaAux,null,"R");
+            return new NodoArbol (piezaAux,null,"R");
         }
         else {
             return null;
         }
     }
 
-    //mueve una pieza auxiliar y comprueba cada elemento para ver si ha colisionado
-    //true si se puede mover sin colision; si no false
+
+    /**
+     * Nombre: checkearMovimiento
+     * @return boolean
+     * @param piezaAux la Pieza auxiliar que indicará si se puede desplazar a su posición, o no; según los muros que haya en el Tablero.
+     *
+     * Indica si las posiciones de la Pieza auxiliar no colisionan con ningún muro.
+     *
+     * El método devuelve "True" si no hay colisiones, o "False" si sí las hay.
+     */
+
     public boolean checkearMovimiento (Pieza piezaAux) {
         boolean result = true;
         if (getMatriz () [piezaAux.getAislado ().getFilaElemento ()][piezaAux.getAislado ().getColumnaElemento ()].equals ("1") ||
-                getMatriz () [piezaAux.getVertice().getFilaElemento()][piezaAux.getVertice().getColumnaElemento()].equals ("1") ||
+                getMatriz () [piezaAux.getVertice().getFilaElemento()][piezaAux.getVertice ().getColumnaElemento ()].equals ("1") ||
                 getMatriz () [piezaAux.getAdyacente ().getFilaElemento ()][piezaAux.getAdyacente ().getColumnaElemento ()].equals ("1") ||
                 getMatriz () [piezaAux.getExtremo ().getFilaElemento ()][piezaAux.getExtremo ().getColumnaElemento ()].equals ("1")) {
             result = false;
         }
         return result;
     }
-
-    /*
-
-        Movimiento: 1 opcion
-        1. Crear pieza auxiliar identica a la del nodo que se expande
-        2. Relizar el movimiento de la pieza
-        3. Comprobar si alguna casilla de la pieza(usando la fila y columna de cada elemento?) se solapa con un muro del tablero. Si coincide con un 1, devuelve false ?
-           Teniendo las casillas almacenadas de la pieza
-        4.
-
-
-
-
-     */
 }
-

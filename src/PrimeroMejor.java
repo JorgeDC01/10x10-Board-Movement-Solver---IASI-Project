@@ -1,132 +1,193 @@
-import java.util.Collections;
 import java.util.*;
+
+/**
+ * Nombre: PrimeroMejor
+ * Esta clase define el Algoritmo de Primero Mejor siguiendo los apuntes de la teoría de la asignatura.
+ *
+ * @version 1.0
+ * @author Jorge Del Castillo Gómez, Eduardo Cano García y Raúl Hormigo Cerón.
+ */
 
 public class PrimeroMejor {
     private Arbol arbol;
-    private NodoArbol actual; //Puntero para recorrer el arbol.
+    private NodoArbol actual;
     private int nodosGenerados;
-    private Queue<NodoArbol> nodosAbiertos = new PriorityQueue<>(new MenorHeuristica());
-    private Set<NodoArbol> nodosCerrados = new HashSet<NodoArbol>();
+    private Queue<NodoArbol> nodosAbiertos = new PriorityQueue <NodoArbol> (new MenorHeuristica ());
+    private Set <NodoArbol> nodosCerrados = new HashSet< NodoArbol> ();
 
-    public PrimeroMejor(Pieza pieza){
-        arbol = new Arbol(pieza);
-        actual = arbol.getRaiz();
+    /**
+     * Nombre: PrimeroMejor
+     * @param pieza la Pieza con la que se empieza a resolver el problema.
+     *
+     * Constructor parametrizado de la clase.
+     */
+
+    public PrimeroMejor (Pieza pieza) {
+        arbol = new Arbol (pieza);
+        actual = arbol.getRaiz ();
         nodosGenerados = 1;
-        nodosAbiertos.add(actual);
-        ejecutar();
+        nodosAbiertos.add (actual);
+        ejecutar ();
     }
 
-    public NodoArbol getActual() { return actual; }
 
-    public void setActual(NodoArbol actual) { this.actual = actual; }
+    /**
+     * Nombre: getActual
+     * @return NodoArbol
+     *
+     * Devuelve el Nodo al que apunta el puntero "actual".
+     */
 
-    public Arbol getArbol() { return arbol; }
-
-    public void setArbol(Arbol arbol) { this.arbol = arbol; }
-
-    public int getNodosGenerados() { return nodosGenerados; }
-
-    public void setNodosGenerados(int nodosGenerados) { this.nodosGenerados = nodosGenerados; }
-
-    public Queue<NodoArbol> getNodosAbiertos() { return nodosAbiertos; }
-
-    public void setNodosAbiertos(Queue<NodoArbol> nodosAbiertos) { this.nodosAbiertos = nodosAbiertos; }
-
-    public Set<NodoArbol> getNodosCerrados() { return nodosCerrados; }
-
-    public void setNodosCerrados(Set<NodoArbol> nodosCerrados) { this.nodosCerrados = nodosCerrados; }
+    public NodoArbol getActual() {
+        return actual;
+    }
 
 
-    /*
-           Expande del nodo actual con todos sus operadores para posteriormente elegir la menor h'
-        */
-    public void expansionCompleta(){
-        NodoArbol hijo = Tablero.getInstance().moverArriba(actual.getPieza());
+    /**
+     * Nombre: getNodosGenerados
+     * @return int
+     *
+     * Devuelve el número de Nodos generados por el Algorimto.
+     *
+     * El int devuelto indica el número de Nodos generados.
+     */
 
-        if(hijo != null){
-            hijo.setPadre(actual);
+    public int getNodosGenerados() {
+        return nodosGenerados;
+    }
+
+
+    /**
+     * Nombre: getNodosAbiertos
+     * @return Queue </NodoArbol>
+     *
+     * Devuelve la cola de Nodos abiertos.
+     *
+     * El valor devuelto es un puntero a la Estructura de Datos.
+     */
+
+    public Queue <NodoArbol> getNodosAbiertos () {
+        return nodosAbiertos;
+    }
+
+
+    /**
+     * Nombre: getNodosCerrados
+     * @return Set </NodoArbol>
+     *
+     * Devuelve el conjunto de Nodos cerrados
+     *
+     * El valor devuelto es un puntero a la Estructura de Datos.
+     */
+
+    public Set <NodoArbol> getNodosCerrados () {
+        return nodosCerrados;
+    }
+
+
+    /**
+     * Nombre: expansionCompleta
+     *
+     * Expande el Nodo actual, intentando generar todos sus hijos con todos sus operadores.
+     *
+     * El método no devuelve nada.
+     */
+
+    public void expansionCompleta () {
+        NodoArbol hijo = Tablero.getInstance ().moverArriba (actual.getPieza ());
+        if (hijo != null) {
+            hijo.setPadre (actual);
             nodosGenerados++;
-            actual.getHijos().add(hijo);
+            actual.getHijos ().add (hijo);
         }
-        hijo = Tablero.getInstance().moverDerecha(actual.getPieza());
-        if(hijo != null){
-            hijo.setPadre(actual);
+
+        hijo = Tablero.getInstance ().moverDerecha (actual.getPieza ());
+        if (hijo != null) {
+            hijo.setPadre (actual);
             nodosGenerados++;
-            actual.getHijos().add(hijo);
+            actual.getHijos ().add (hijo);
         }
-        hijo = Tablero.getInstance().moverAbajo(actual.getPieza());
-        if(hijo != null){
-            hijo.setPadre(actual);
+
+        hijo = Tablero.getInstance ().moverAbajo (actual.getPieza ());
+        if (hijo != null) {
+            hijo.setPadre (actual);
             nodosGenerados++;
-            actual.getHijos().add(hijo);
+            actual.getHijos ().add (hijo);
         }
-        hijo = Tablero.getInstance().moverIzquierda(actual.getPieza());
-        if(hijo != null){
-            hijo.setPadre(actual);
+
+        hijo = Tablero.getInstance ().moverIzquierda (actual.getPieza ());
+        if (hijo != null) {
+            hijo.setPadre (actual);
             nodosGenerados++;
-            actual.getHijos().add(hijo);
+            actual.getHijos ().add (hijo);
         }
-        hijo = Tablero.getInstance().rotar(actual.getPieza());
-        if(hijo != null){
-            hijo.setPadre(actual);
+
+        hijo = Tablero.getInstance ().rotar (actual.getPieza ());
+        if (hijo != null) {
+            hijo.setPadre (actual);
             nodosGenerados++;
-            actual.getHijos().add(hijo);
+            actual.getHijos ().add (hijo);
         }
-        // Una vez tengamos todos los hijos expandidos del actual, los recorremos, comprobamos si están en las listas de abiertos y cerrados y los insertamos
-            for (NodoArbol aux : getActual().getHijos()) {
-                if (!getNodosAbiertos().contains(aux) && !getNodosCerrados().contains(aux)) {
-                    getNodosAbiertos().add(aux);
-                }
+
+        for (NodoArbol aux : getActual ().getHijos ()) {
+            if (!getNodosAbiertos ().contains (aux) && !getNodosCerrados ().contains (aux)) {
+                getNodosAbiertos ().add (aux);
             }
+        }
     }
 
-    /*
 
+    /**
+     * Nombre: mostrarSolucion
+     *
+     * Muestra por pantalla la solución al problema.
+     *
+     * Este método no devuelve nada.
      */
-    public void mostrarSolucion(){
-        List<NodoArbol> solucion = new ArrayList<NodoArbol>();
+
+    public void mostrarSolucion () {
+        List <NodoArbol> solucion = new ArrayList <NodoArbol> ();
         String resultado = "";
-        while(actual.getPadre() != null){
-            solucion.add(actual);
-            actual = actual.getPadre();
+        while (actual.getPadre () != null) {
+            solucion.add (actual);
+            actual = actual.getPadre ();
         }
-        for(int i = solucion.size() - 1; i >= 0; i--) {
-            resultado = resultado + solucion.get(i).getOperacion() + ", ";
+        for (int i = solucion.size () - 1; i >= 0; i--) {
+            resultado += solucion.get (i).getOperacion () + ", ";
         }
-        System.out.println("Secuencia solucion: " + resultado);
+        System.out.println ("Secuencia solucion: " + resultado);
     }
 
-    /*
-        Algoritmo de Primero Mejor.
-     */
-    public void ejecutar() {
-        long inicio = System.currentTimeMillis();
-        System.out.println("--- Algoritmo Primero Mejor ---");
-        /*while((listaAbiertos no esté vacia) && (no se encuentre la sol))
 
-            Expandir hijos del nodo actual
-            Inserto todos los hijos en la lista de abiertos, pero antes comprobar que no se repiten en ambos listas
-            Inserto el actual en la lista de cerrados
-            Elijo el mejor de la lista de abiertos y se lo asigno a actual
-        */
+    /**
+     * Nombre: ejecutar
+     *
+     * Ejecuta el Algoritmo de Primero Mejor.
+     *
+     * Este método no devuelve nada.
+     */
+
+    public void ejecutar () {
+        long inicio = System.currentTimeMillis ();
+        System.out.println ("--- Algoritmo Primero Mejor ---");
         boolean solEncontrada = false;
         while (actual != null && !solEncontrada) {
-            expansionCompleta();
-            getNodosCerrados().add(actual);
-            actual = getNodosAbiertos().poll();
-            if (actual != null && actual.getHeuristica() == 0) {
+            expansionCompleta ();
+            getNodosCerrados ().add (actual);
+            actual = getNodosAbiertos ().poll ();
+            if (actual != null && actual.getHeuristica () == 0) {
                 solEncontrada = true;
             }
         }
         if (solEncontrada) {
-            mostrarSolucion();
-            System.out.println("Número de nodos generados: " + getNodosGenerados());
+            mostrarSolucion ();
+            System.out.println ("Número de nodos generados: " + getNodosGenerados ());
         } else {
-            System.out.println("No se ha encontrado una solución...");
-            System.out.println("Número de nodos generados: " + getNodosGenerados());
+            System.out.println ("No se ha encontrado una solución...");
+            System.out.println ("Número de nodos generados: " + getNodosGenerados ());
         }
-        long fin = System.currentTimeMillis();
+        long fin = System.currentTimeMillis ();
         double tiempo = (double) (fin - inicio);
-        System.out.println("Tiempo en ejecutarse Primero Mejor: " + tiempo + " milisegundos.");
+        System.out.println ("Tiempo en ejecutarse Primero Mejor: " + tiempo + " milisegundos.");
     }
 }
